@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "@ui": ["./src/ui"],
+      "@lib": ["./src/lib"],
+      "@api": ["./src/api"],
+      "@features": ["./src/features"],
+      "@screens": ["./src/screens"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
