@@ -10,7 +10,7 @@ export interface ITheme {
     family: string;
     weights: {
       normal: number;
-      bold: number;
+      bold: string;
     };
   };
   colors: {

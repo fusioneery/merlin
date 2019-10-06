@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {TouchableOpacity, Platform, MaskedViewIOS} from 'react-native';
 import {prop, ifProp} from 'styled-tools';
 import {useTheme} from 'emotion-theming';
@@ -21,7 +21,14 @@ interface IButtonProps {
 }
 
 const UIButton = (props: IButtonProps) => {
-  const {isTextOnly, title = 'Отправить', color = 'primary', onPress, size = 'normal', outlined} = props;
+  const {
+    isTextOnly = false,
+    title = 'Отправить',
+    color = 'primary',
+    onPress,
+    size = 'normal',
+    outlined,
+  } = props;
   const theme: any = useTheme();
   const textSize = size == 'normal' ? theme.font.sizes.small : theme.font.sizes.normal;
   if (isTextOnly) {

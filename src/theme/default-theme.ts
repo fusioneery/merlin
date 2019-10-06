@@ -11,7 +11,7 @@ const defaultTheme: ITheme = {
     family: 'Circe',
     weights: {
       normal: 400,
-      bold: 600,
+      bold: 'bold',
     },
   },
   colors: {
