@@ -19,8 +19,16 @@ module.exports = {
           '@api': './src/api',
           '@features': './src/features',
           '@screens': './src/screens',
+          '@theme': './src/theme',
         },
+        extensions: ['.js', '.ts', '.tsx', '.ios.js', '.android.js'],
       },
     ],
+    '@babel/plugin-transform-runtime',
   ],
+  env: {
+    production: {
+      plugins: ['transform-remove-console'],
+    },
+  },
 };

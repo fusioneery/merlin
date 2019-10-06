@@ -2,13 +2,14 @@
   "compilerOptions": {
     "target": "esnext",
     "allowSyntheticDefaultImports": false,
-    "baseUrl": "./",
+    "baseUrl": "./src/",
     "paths": {
-      "@ui": ["./src/ui"],
-      "@lib": ["./src/lib"],
-      "@api": ["./src/api"],
-      "@features": ["./src/features"],
-      "@screens": ["./src/screens"]
+      "@ui/*": ["ui/*"],
+      "@lib/*": ["lib/*"],
+      "@api/*": ["api/*"],
+      "@features/*": ["features/*"],
+      "@screens/*": ["screens/*"],
+      "@theme/*": ["theme/*"]
     }
   },
   "exclude": ["node_modules"]

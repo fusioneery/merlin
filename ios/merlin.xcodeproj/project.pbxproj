@@ -5,9 +5,9 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* merlinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* merlinTests.m */; };
+		0177BFB82347F76C00FC4519 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0177BFB72347F76C00FC4519 /* AppCenter-Config.plist */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -20,6 +20,8 @@
 		7CA36CDADD769EF4E0F09078 /* libPods-merlin-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E53CDE7FCBE6CE8D7ABBC4 /* libPods-merlin-tvOS.a */; };
 		9CDCEF9818167FD48964609D /* libPods-merlin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 275951719A62EB53EA483719 /* libPods-merlin.a */; };
 		A637E6F0A781F11785B83CF5 /* libPods-merlinTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A00AC31CBC3D882EA2536E38 /* libPods-merlinTests.a */; };
+		106BB05ACA234FDBB6993A36 /* Circe_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96790C63BB464FDCB85A6D42 /* Circe_bold.ttf */; };
+		D0D85C227AD64600AD4A77A1 /* Circe.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 072B09CAA4BA4D4DBBA13FB5 /* Circe.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,7 @@
 		00E356EE1AD99517003FC87E /* merlinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = merlinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* merlinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = merlinTests.m; sourceTree = "<group>"; };
+		0177BFB72347F76C00FC4519 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* merlin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = merlin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = merlin/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = merlin/AppDelegate.m; sourceTree = "<group>"; };
@@ -67,6 +70,8 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F0B3573BD96BFE2496C96EF9 /* Pods-merlin-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-merlin-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-merlin-tvOSTests/Pods-merlin-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		96790C63BB464FDCB85A6D42 /* Circe_bold.ttf */ = {isa = PBXFileReference; name = "Circe_bold.ttf"; path = "../assets/fonts/Circe_bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		072B09CAA4BA4D4DBBA13FB5 /* Circe.ttf */ = {isa = PBXFileReference; name = "Circe.ttf"; path = "../assets/fonts/Circe.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,7 +166,6 @@
 				D076B8E8C7EB2F5806C57C99 /* Pods-merlinTests.debug.xcconfig */,
 				70C8178F6DC230D629EE7024 /* Pods-merlinTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -175,12 +179,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				0177BFB72347F76C00FC4519 /* AppCenter-Config.plist */,
 				13B07FAE1A68108700A75B9A /* merlin */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* merlinTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				57D86BF022E6E3422BECEE45 /* Pods */,
+				398801708BAB44EB9BDC2473 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -197,6 +203,16 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		398801708BAB44EB9BDC2473 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				96790C63BB464FDCB85A6D42 /* Circe_bold.ttf */,
+				072B09CAA4BA4D4DBBA13FB5 /* Circe.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -285,7 +301,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -308,6 +324,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -338,6 +355,9 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				0177BFB82347F76C00FC4519 /* AppCenter-Config.plist in Resources */,
+				106BB05ACA234FDBB6993A36 /* Circe_bold.ttf in Resources */,
+				D0D85C227AD64600AD4A77A1 /* Circe.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
