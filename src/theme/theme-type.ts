@@ -1,5 +1,23 @@
+type Gradient = [string, string];
+export type Shadow = {
+  color: string;
+  offset: {
+    width: number;
+    height: number;
+  };
+  radius: number;
+  opacity: number;
+};
+
+type Sizes = {
+  height: string;
+  width: string;
+};
 export interface ITheme {
-  borderRadius: string;
+  borderRadius: {
+    normal: string;
+    card: string;
+  };
 
   font: {
     sizes: {
@@ -12,11 +30,20 @@ export interface ITheme {
       normal: number;
       bold: string;
     };
+    lineHeight: string;
   };
   colors: {
     primary: string;
     secondary: string;
+    error: string;
     neutral: string;
+    dark: string;
+    light: string;
+  };
+  cards: {
+    borderRadius: string;
+    shadow: Shadow;
+    iconSizes: Sizes;
   };
   buttons: {
     sizes: {
@@ -30,17 +57,18 @@ export interface ITheme {
     borderRadius: string;
   };
   gradients: {
-    primary: [string, string];
-    secondary: [string, string];
-    neutral: [string, string];
+    primary: Gradient;
+    secondary: Gradient;
+    neutral: Gradient;
   };
   shadow: {
-    color: string;
-    offset: {
-      width: number;
-      height: number;
-    };
-    radius: number;
-    opacity: number;
+    light: Shadow;
+    heavy: Shadow;
+  };
+  padding: {
+    default: string;
+  };
+  icons: {
+    sizes: Sizes;
   };
 }

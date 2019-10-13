@@ -20,6 +20,7 @@ module.exports = {
           '@features': './src/features',
           '@screens': './src/screens',
           '@theme': './src/theme',
+          '@assets': './src/assets',
         },
         extensions: ['.js', '.ts', '.tsx', '.ios.js', '.android.js'],
       },

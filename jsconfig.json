@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "allowSyntheticDefaultImports": false,
+    "experimentalDecorators": true,
     "baseUrl": "./src/",
     "paths": {
       "@ui/*": ["ui/*"],
@@ -9,7 +10,8 @@
       "@api/*": ["api/*"],
       "@features/*": ["features/*"],
       "@screens/*": ["screens/*"],
-      "@theme/*": ["theme/*"]
+      "@theme/*": ["theme/*"],
+      "@assets/*": ["assets/*"]
     }
   },
   "exclude": ["node_modules"]

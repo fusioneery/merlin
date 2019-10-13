@@ -1,11 +1,13 @@
 import React, {ReactNode} from 'react';
-import {TouchableOpacity, Platform, MaskedViewIOS} from 'react-native';
+import {TouchableOpacity, Platform} from 'react-native';
+import MaskedView from '@react-native-community/masked-view';
 import {prop, ifProp} from 'styled-tools';
 import {useTheme} from 'emotion-theming';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from '@theme/styled';
 import {ITheme} from '@theme/theme-type';
-import {Text} from '@lib/Text';
+import {Text} from '@lib/wrappers/Text';
+import {getShadowStyle} from '@lib/shadow-style';
 
 interface IButtonProps {
   onPress?(): void;
@@ -17,7 +19,6 @@ interface IButtonProps {
   size?: 'normal' | 'big';
   outlined?: boolean;
   isTextOnly?: boolean;
-  theme: ITheme;
 }
 
 const UIButton = (props: IButtonProps) => {
@@ -31,37 +32,32 @@ const UIButton = (props: IButtonProps) => {
   } = props;
   const theme: any = useTheme();
   const textSize = size == 'normal' ? theme.font.sizes.small : theme.font.sizes.normal;
+  const textInGradientCommonProps = {
+    color: theme.colors[color],
+    size: textSize,
+    fontFamily: theme.fontFamily,
+  };
+  const text = title.toUpperCase();
   if (isTextOnly) {
     if (Platform.OS == 'ios') {
       return (
         <TouchableOpacity onPress={onPress}>
-          <MaskedViewIOS
-            maskElement={
-              <TextInGradient color={theme.colors[color]} size={textSize} fontFamily={theme.font.family}>
-                {title.toUpperCase()}
-              </TextInGradient>
-            }>
+          <MaskedView maskElement={<TextInGradient {...textInGradientCommonProps}>{text}</TextInGradient>}>
             <StyledLinearGradientContainer
               start={{x: 0, y: 0}}
               end={{x: 1, y: 0}}
               colors={theme.gradients[color]}>
-              <TextInGradient
-                color={theme.colors[color]}
-                size={textSize}
-                fontFamily={theme.font.family}
-                style={{opacity: 0}}>
-                {title.toUpperCase()}
+              <TextInGradient {...textInGradientCommonProps} style={{opacity: 0}}>
+                {text}
               </TextInGradient>
             </StyledLinearGradientContainer>
-          </MaskedViewIOS>
+          </MaskedView>
         </TouchableOpacity>
       );
     } else {
       return (
         <TouchableOpacity onPress={onPress}>
-          <TextInGradient color={theme.colors[color]} size={textSize} fontFamily={theme.font.family}>
-            {title.toUpperCase()}
-          </TextInGradient>
+          <TextInGradient {...textInGradientCommonProps}>{text}</TextInGradient>
         </TouchableOpacity>
       );
     }
@@ -70,22 +66,13 @@ const UIButton = (props: IButtonProps) => {
     return (
       <TouchableOpacity onPress={onPress}>
         <Outline color={theme.colors[color]} radius={theme.buttons.borderRadius} size={size}>
-          <TextInGradient color={theme.colors[color]} size={textSize} fontFamily={theme.font.family}>
-            {title.toUpperCase()}
-          </TextInGradient>
+          <TextInGradient {...textInGradientCommonProps}>{text}</TextInGradient>
         </Outline>
       </TouchableOpacity>
     );
   }
   return (
-    <TouchableOpacity
-      style={{
-        shadowOffset: theme.shadow.offset,
-        shadowBlur: theme.shadow.radius,
-        shadowOpacity: theme.shadow.opacity,
-        shadowColor: theme.shadow.color,
-      }}
-      onPress={onPress}>
+    <TouchableOpacity style={getShadowStyle(theme.shadow.heavy)} onPress={onPress}>
       <StyledLinearGradient
         size={size}
         start={{x: 0, y: 0}}
