@@ -1,24 +1,31 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {useTheme} from 'emotion-theming';
 import {defaultTheme} from '@theme/default-theme';
 import styled from '@theme/styled';
 import {ITheme} from '@theme/theme-type';
-import {Text} from '@lib/wrappers/Text';
+import {Text} from '@ui/atoms/text';
 import {getShadowStyle} from '@lib/shadow-style';
-import Info from 'assets/icons/info.svg';
 import Arrow from 'assets/icons/arrow.svg';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 interface IToolbarProps {
   title: string;
+  children: ReactNode;
+  onBack?(): void;
+  noShadow?: boolean;
 }
 
-export const Toolbar: React.FC<IToolbarProps> = ({title}) => {
+export const Toolbar: React.FC<IToolbarProps> = ({title, children, onBack, noShadow}) => {
   const theme: ITheme = useTheme();
   return (
-    <Container style={getShadowStyle(theme.shadow.light)}>
-      <Arrow {...theme.icons.sizes} fill={theme.colors.dark} />
+    <Container style={noShadow ? {} : getShadowStyle(theme.shadow.light)}>
+      {onBack && (
+        <TouchableWithoutFeedback onPress={onBack}>
+          <Arrow {...theme.icons.sizes} fill={theme.colors.dark} />
+        </TouchableWithoutFeedback>
+      )}
       <Text weight={theme.font.weights.bold}>{title}</Text>
-      <Info {...theme.icons.sizes} fill={theme.colors.dark} />
+      {children}
     </Container>
   );
 };

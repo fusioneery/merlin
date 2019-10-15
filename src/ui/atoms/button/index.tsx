@@ -6,7 +6,7 @@ import {useTheme} from 'emotion-theming';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from '@theme/styled';
 import {ITheme} from '@theme/theme-type';
-import {Text} from '@lib/wrappers/Text';
+import {Text} from '@ui/atoms/text';
 import {getShadowStyle} from '@lib/shadow-style';
 
 interface IButtonProps {
@@ -19,29 +19,37 @@ interface IButtonProps {
   size?: 'normal' | 'big';
   outlined?: boolean;
   isTextOnly?: boolean;
+  style?: any;
+  weight?: string;
+  isLowerCase?: boolean;
 }
 
 const UIButton = (props: IButtonProps) => {
+  const theme: any = useTheme();
   const {
     isTextOnly = false,
+    isLowerCase = false,
     title = 'Отправить',
     color = 'primary',
+    weight = theme.font.weights.bold,
     onPress,
     size = 'normal',
     outlined,
+    style,
   } = props;
-  const theme: any = useTheme();
   const textSize = size == 'normal' ? theme.font.sizes.small : theme.font.sizes.normal;
   const textInGradientCommonProps = {
     color: theme.colors[color],
+    weight: weight,
     size: textSize,
     fontFamily: theme.fontFamily,
+    textAlign: 'center'
   };
-  const text = title.toUpperCase();
+  const text = isLowerCase ? title : title.toUpperCase();
   if (isTextOnly) {
     if (Platform.OS == 'ios') {
       return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity style={style} onPress={onPress}>
           <MaskedView maskElement={<TextInGradient {...textInGradientCommonProps}>{text}</TextInGradient>}>
             <StyledLinearGradientContainer
               start={{x: 0, y: 0}}
@@ -56,7 +64,7 @@ const UIButton = (props: IButtonProps) => {
       );
     } else {
       return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity style={style} onPress={onPress}>
           <TextInGradient {...textInGradientCommonProps}>{text}</TextInGradient>
         </TouchableOpacity>
       );
@@ -64,7 +72,7 @@ const UIButton = (props: IButtonProps) => {
   }
   if (outlined) {
     return (
-      <TouchableOpacity onPress={onPress}>
+      <TouchableOpacity style={style} onPress={onPress}>
         <Outline color={theme.colors[color]} radius={theme.buttons.borderRadius} size={size}>
           <TextInGradient {...textInGradientCommonProps}>{text}</TextInGradient>
         </Outline>
@@ -91,7 +99,8 @@ const UIButton = (props: IButtonProps) => {
 const TextInGradient = styled(Text)`
   color: ${prop('color')};
   font-family: ${prop('fontFamily')};
-  font-weight: bold;
+  font-weight: ${prop('weight', 'bold')};
+  text-align: center;
 `;
 
 const StyledLinearGradient = styled(LinearGradient)`

@@ -1,27 +1,24 @@
 import React from 'react';
-import {Provider} from 'mobx-react';
-import {configure} from 'mobx';
 import {ThemeProvider} from 'emotion-theming';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import SafeAreaView from 'react-native-safe-area-view';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 import {defaultTheme} from '@theme/default-theme';
 import styled from '@theme/styled';
 import {AddProfileScreen} from '@screens/add-profile';
-import {profilesStore} from '@features/profiles/store';
-
-// configure({enforceActions: true});
+import {PhotoInstructionScreen} from '@screens/add-profile/photo-instruction';
+import {ViewProfileScreen} from '@screens/view-profile';
 
 const App: React.FC = () => {
   return (
-    // <Provider profilesStore={profilesStore}>
     <ThemeProvider theme={defaultTheme}>
       <SafeAreaProvider>
         <SafeAreaView forceInset={{bottom: 'never'}} style={{flex: 1, backgroundColor: 'white'}}>
-          <AddProfileScreen />
+          <AppStack />
         </SafeAreaView>
       </SafeAreaProvider>
     </ThemeProvider>
-    // </Provider>
   );
 };
 
@@ -30,5 +27,37 @@ const CenteredView = styled.View`
   justify-content: space-around;
   align-items: center;
 `;
+
+const ProfileStack = createStackNavigator(
+  {
+    AddProfile: {
+      screen: AddProfileScreen,
+    },
+    ViewProfile: {
+      screen: ViewProfileScreen,
+    },
+  },
+  {
+    headerMode: 'none',
+  },
+);
+
+const AppNavigator = createStackNavigator(
+  {
+    Profile: {
+      screen: ProfileStack,
+    },
+    AddProfileHintModal: {
+      screen: PhotoInstructionScreen,
+    },
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+    transparentCard: true,
+  },
+);
+
+const AppStack = createAppContainer(AppNavigator);
 
 export default App;

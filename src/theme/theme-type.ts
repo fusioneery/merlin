@@ -17,6 +17,7 @@ export interface ITheme {
   borderRadius: {
     normal: string;
     card: string;
+    analysisCard: string;
   };
 
   font: {
@@ -44,6 +45,9 @@ export interface ITheme {
     borderRadius: string;
     shadow: Shadow;
     iconSizes: Sizes;
+    width: string;
+    height: string;
+    overlayGradient: [string, string, string, string, string];
   };
   buttons: {
     sizes: {
@@ -55,6 +59,14 @@ export interface ITheme {
       };
     };
     borderRadius: string;
+  };
+  avatars: {
+    borderRadius: {
+      profile: string;
+    };
+    sizes: {
+      profile: Sizes;
+    };
   };
   gradients: {
     primary: Gradient;
@@ -69,6 +81,9 @@ export interface ITheme {
     default: string;
   };
   icons: {
-    sizes: Sizes;
+    sizes: {
+      small: Sizes;
+      medium: Sizes;
+    };
   };
 }

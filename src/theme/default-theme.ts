@@ -5,6 +5,7 @@ const defaultTheme: ITheme = {
   borderRadius: {
     normal: '10px',
     card: '33px',
+    analysisCard: '20px'
   },
   font: {
     sizes: {
@@ -39,8 +40,22 @@ const defaultTheme: ITheme = {
       opacity: 0.25,
     },
     iconSizes: {
-      width: '137px',
-      height: '157px',
+      width: normalize(117),
+      height: normalize(137),
+    },
+    width: normalize(300),
+    height: normalize(345),
+    overlayGradient: ['rgba(0,0,0,0)', 'rgba(0,0,0,0)', 'rgba(0,0,0,0)', 'rgba(0,0,0,0.63)', 'rgba(0,0,0,1)'],
+  },
+  avatars: {
+    borderRadius: {
+      profile: normalize(50 / 2),
+    },
+    sizes: {
+      profile: {
+        width: normalize(50),
+        height: normalize(50),
+      },
     },
   },
   buttons: {
@@ -84,8 +99,14 @@ const defaultTheme: ITheme = {
   },
   icons: {
     sizes: {
-      width: '24px',
-      height: '24px',
+      small: {
+        width: '24px',
+        height: '24px',
+      },
+      medium: {
+        width: '53px',
+        height: '53px',
+      }
     },
   },
 };
