@@ -12,9 +12,8 @@ export const modalSelectorCoordinates = createStore({x: 0, y: 0}).on(
   setPositionModalSelector,
   (state, payload) => payload,
 );
-modalSelectorCoordinates.watch(state => console.warn(state.x, state.y));
+modalSelectorCoordinates.watch(state => console.log(state.x, state.y));
 export const modalSelectorIsVisible = createStore(false)
   .on(showModalSelector, () => true)
   .on(hideModalSelector, () => false);
-modalSelectorIsVisible.watch(state => console.warn(state));
 export const modalSelectorStore = createStoreObject({modalSelectorCoordinates, modalSelectorIsVisible});

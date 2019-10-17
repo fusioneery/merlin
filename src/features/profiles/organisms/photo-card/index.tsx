@@ -9,7 +9,8 @@ import Sideview from 'assets/icons/face-sideview.svg';
 import {UIButton} from '@ui/atoms/button';
 import {getShadowStyle} from '@lib/shadow-style';
 import {Text} from '@ui/atoms/text';
-import { normalize } from '@lib/normalize-font';
+import {normalize} from '@lib/normalize-font';
+import {Shadow} from '@ui/atoms/shadow';
 
 interface IPhotoCardProps {
   type: 'profile' | 'sideview';
@@ -26,25 +27,31 @@ export const PhotoCard: React.FC<IPhotoCardProps> = ({type, onLoad, photo}) => {
   };
   const hasPhoto = photo;
   return (
-    <Card style={getShadowStyle(theme.cards.shadow)} title="">
-      {!hasPhoto && <Icon style={iconStyle} {...theme.cards.iconSizes} />}
-      <Caption color={theme.colors.neutral}>Фото в {type == 'profile' ? 'профиль' : 'фас'}</Caption>
-      <UIButton
-        style={{zIndex: 5}}
-        onPress={onLoad}
-        size="big"
-        isTextOnly
-        color="primary"
-        title={photo ? 'изменить' : 'загрузить'}
-      />
-      {hasPhoto && (
-        <>
-          <Overlay start={{x: 0.5, y: 0}} end={{x: 0.5, y: 1}} colors={theme.cards.overlayGradient}></Overlay>
+    //@ts-ignore
+    <StyledShadow shadow={theme.cards.shadow} radius={theme.cards.borderRadius}>
+      <Card style={getShadowStyle(theme.cards.shadow)} title="">
+        {!hasPhoto && <Icon style={iconStyle} {...theme.cards.iconSizes} />}
+        <Caption color={theme.colors.neutral}>Фото в {type == 'profile' ? 'профиль' : 'фас'}</Caption>
+        <UIButton
+          style={{zIndex: 5}}
+          onPress={onLoad}
+          size="big"
+          isTextOnly
+          color="primary"
+          title={photo ? 'изменить' : 'загрузить'}
+        />
+        {hasPhoto && (
+          <>
+            <Overlay
+              start={{x: 0.5, y: 0}}
+              end={{x: 0.5, y: 1}}
+              colors={theme.cards.overlayGradient}></Overlay>
 
-          <Photo imageStyle={photoStyles} source={{uri: photo}} />
-        </>
-      )}
-    </Card>
+            <Photo imageStyle={photoStyles} source={{uri: photo}} />
+          </>
+        )}
+      </Card>
+    </StyledShadow>
   );
 };
 
@@ -54,6 +61,7 @@ const Card = styled.View`
   background-color: white;
   display: flex;
   flex-direction: column;
+  position: relative;
   justify-content: flex-end;
   align-items: center;
   margin-bottom: 32px;
@@ -84,4 +92,9 @@ const Overlay = styled(LinearGradient)`
   bottom: 0;
   z-index: 2;
   border-radius: ${defaultTheme.cards.borderRadius};
+`;
+
+const StyledShadow = styled(Shadow)`
+  margin-bottom: 32px;
+  z-index: 1;
 `;

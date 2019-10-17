@@ -5,7 +5,7 @@ const defaultTheme: ITheme = {
   borderRadius: {
     normal: '10px',
     card: '33px',
-    analysisCard: '20px'
+    analysisCard: '20px',
   },
   font: {
     sizes: {
@@ -106,7 +106,7 @@ const defaultTheme: ITheme = {
       medium: {
         width: '53px',
         height: '53px',
-      }
+      },
     },
   },
 };

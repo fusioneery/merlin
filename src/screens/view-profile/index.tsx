@@ -87,7 +87,7 @@ export const ViewProfileScreen: React.FC<Props> = ({navigation}) => {
         if (Y + 200 > DeviceHeight) Y = DeviceHeight - 200;
         //@ts-ignore
         setPositionModalSelector({x: X, y: Y});
-        console.warn(x, y);
+        console.log(x, y);
       });
     }
   }, [detailsRef.current]);
@@ -124,7 +124,6 @@ export const ViewProfileScreen: React.FC<Props> = ({navigation}) => {
       <Selector
         onChange={val => {
           if (val.value === 'Редактировать') navigation.navigate('AddProfile');
-          console.warn(val);
         }}
         onDelete={() => console.log('deleted')}
         isVisible={modalSelectorIsVisible}

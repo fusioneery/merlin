@@ -11,7 +11,7 @@ interface IModalProps {
 
 export const Modal: React.FC<IModalProps> = ({visible, children, onBGPress}) => {
   return (
-    <EnhancedModal animationType="fade" transparent={true} visible={visible}>
+    <EnhancedModal onRequestClose={onBGPress} animationType="fade" transparent={true} visible={visible}>
       <TouchableWithoutFeedback onPress={onBGPress}>
         <BG>{children}</BG>
       </TouchableWithoutFeedback>

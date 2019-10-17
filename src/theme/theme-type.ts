@@ -1,5 +1,5 @@
 type Gradient = [string, string];
-export type Shadow = {
+export type IShadow = {
   color: string;
   offset: {
     width: number;
@@ -43,7 +43,7 @@ export interface ITheme {
   };
   cards: {
     borderRadius: string;
-    shadow: Shadow;
+    shadow: IShadow;
     iconSizes: Sizes;
     width: string;
     height: string;
@@ -74,8 +74,8 @@ export interface ITheme {
     neutral: Gradient;
   };
   shadow: {
-    light: Shadow;
-    heavy: Shadow;
+    light: IShadow;
+    heavy: IShadow;
   };
   padding: {
     default: string;

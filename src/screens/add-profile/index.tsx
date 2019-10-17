@@ -10,6 +10,7 @@ import {Toolbar} from '@features/navigation/toolbar';
 import {UIButton} from '@ui/atoms/button';
 import {Text} from '@ui/atoms/text';
 import {Selector} from '@features/modal/selector';
+import DialogInput from 'react-native-dialog-input';
 
 import {getShadowStyle} from '@lib/shadow-style';
 import {PhotoCard} from '@features/profiles/organisms/photo-card';
@@ -25,6 +26,15 @@ import {
   hideModalSelector,
 } from '@features/navigation/model';
 import {useSafeArea} from 'react-native-safe-area-view';
+import {
+  optionsStore,
+  refillOptions,
+  chooseOption,
+  addOption,
+  openAddOptionDialog,
+  closeAddOptionDialog,
+  addOptionDialog,
+} from '@features/modal/model';
 
 interface IAddProfileScreenProps {}
 
@@ -48,6 +58,8 @@ export const AddProfileScreen = ({navigation}) => {
   const {photos, name, category} = useStore(newProfileRootStore);
   const {top} = useSafeArea();
   const {modalSelectorCoordinates, modalSelectorIsVisible} = useStore(modalSelectorStore);
+  const opts = useStore(optionsStore);
+  const isDialogVisible = useStore(addOptionDialog);
   const labelStyleParams = {size: theme.font.sizes.small, color: theme.colors.neutral};
   const categoryValRef: any = useRef(null);
   const goToProfile = () => {
@@ -71,6 +83,10 @@ export const AddProfileScreen = ({navigation}) => {
     }
   }, [categoryValRef.current]);
 
+  useEffect(() => {
+    refillOptions(CATS);
+  }, []);
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Toolbar
@@ -88,11 +104,11 @@ export const AddProfileScreen = ({navigation}) => {
       <MainScrollableView>
         <InputGroup>
           <Field>
-            <Text {...labelStyleParams}>ФИО</Text>
+            <FIO {...labelStyleParams}>ФИО</FIO>
             <Input onChangeText={text => changeName(text)} value={name} />
           </Field>
           <Field>
-            <Text {...labelStyleParams}>Категория</Text>
+            <Category {...labelStyleParams}>Категория</Category>
             <CategoryValue onPress={showModalSelector} ref={categoryValRef} weight={theme.font.weights.bold}>
               {category.label}
             </CategoryValue>
@@ -124,11 +140,29 @@ export const AddProfileScreen = ({navigation}) => {
         <Selector
           onChange={val => {
             changeCategory(val);
+            chooseOption(val);
           }}
+          //@ts-ignore
+          onAdd={openAddOptionDialog}
+          value={category.value}
           isVisible={modalSelectorIsVisible}
           coords={modalSelectorCoordinates}
-          options={CATS}
+          options={opts}
+          // value={opts.filter(el => el.active).value}
         />
+        <DialogInput
+          isDialogVisible={isDialogVisible}
+          title="Добавить категорию"
+          hintInput="Введите название"
+          cancelText="Отмена"
+          submitText="Сохранить"
+          submitInput={inp => {
+            const opt = {value: inp, label: inp};
+            //@ts-ignore
+            addOption(opt);
+            closeAddOptionDialog();
+          }}
+          closeDialog={closeAddOptionDialog}></DialogInput>
       </MainScrollableView>
     </View>
   );
@@ -141,16 +175,22 @@ const Field = styled.View`
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  &:not(:first-of-type) {
-    margin-top: 20px;
-  }
+  margin-bottom: 20px;
 `;
+
+const FIO = styled(Text)`
+  top: -7px;
+`;
+
+const Category = styled(Text)`
+  top: -3px;
+`;
+
 const Input = styled.TextInput`
   flex: 1;
   margin-left: 32px;
   font-size: ${defaultTheme.font.sizes.normal};
   padding-bottom: 5px;
-  top: 7px;
   border-bottom-color: #d8d9e2;
   border-bottom-width: 1px;
 `;

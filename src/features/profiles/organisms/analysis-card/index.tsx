@@ -9,32 +9,41 @@ import AnalysisPrimary from 'assets/icons/analysis.svg';
 import AnalysisSecondary from 'assets/icons/analysis-secondary.svg';
 import {IAnalysis} from '@screens/view-profile';
 import {Text} from '@ui/atoms/text';
-import { normalize } from '@lib/normalize-font';
+import {normalize} from '@lib/normalize-font';
+import {Shadow} from '@ui/atoms/shadow';
 
 interface IAnalysisCardProps {
   analysis: IAnalysis;
 }
 
 const getAnalysisByColor = (color, props) => {
-  if (color === 'secondary') { 
-    return <AnalysisSecondary {...props} />
+  if (color === 'secondary') {
+    return <AnalysisSecondary {...props} />;
   } else {
-    return <AnalysisPrimary {...props} />
+    return <AnalysisPrimary {...props} />;
   }
-}
+};
 
 export const AnalysisCard: React.FC<IAnalysisCardProps> = ({analysis: {name, description, color}}) => {
   const theme: ITheme = useTheme();
   return (
-    <Card style={getShadowStyle(theme.shadow.light)}>
-      <Header>
-        {getAnalysisByColor(color, theme.icons.sizes.medium)}
-        <Name weight={theme.font.weights.bold}>{name}</Name>
-      </Header>
-      <Desc>{description}</Desc>
-      <Button color={color} title="Просмотреть" />
-      <TextButton weight={theme.font.weights.normal} isLowerCase isTextOnly color={color} title="Узнать подробнее" />
-    </Card>
+    <StyledShadow shadow={theme.shadow.light} radius={theme.borderRadius.analysisCard}>
+      <Card style={getShadowStyle(theme.shadow.light)}>
+        <Header>
+          {getAnalysisByColor(color, theme.icons.sizes.medium)}
+          <Name weight={theme.font.weights.bold}>{name}</Name>
+        </Header>
+        <Desc>{description}</Desc>
+        <Button color={color} title="Просмотреть" />
+        <TextButton
+          weight={theme.font.weights.normal}
+          isLowerCase
+          isTextOnly
+          color={color}
+          title="Узнать подробнее"
+        />
+      </Card>
+    </StyledShadow>
   );
 };
 
@@ -43,13 +52,18 @@ const Card = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   padding: 40px;
   max-width: ${normalize(320)};
   background-color: white;
   border-radius: ${defaultTheme.borderRadius.analysisCard};
+`;
+
+const StyledShadow = styled(Shadow)`
   &:not(:first-of-type) {
-      margin-top: 25px;
+    margin-top: 25px;
   }
+  z-index: 1;
 `;
 
 const Header = styled.View`
@@ -62,21 +76,21 @@ const Header = styled.View`
 `;
 
 const Desc = styled(Text)`
-  flex: 1;
+  /* flex: 1; */
   margin: 20px 0;
 `;
 
 const Name = styled(Text)`
   margin-left: 30px;
-`
+`;
 
 const Button = styled(UIButton)`
   width: auto;
   max-width: 225px;
   margin-top: 30px;
-`
+`;
 
 const TextButton = styled(Button)`
   margin-top: 16px;
   max-width: 100%;
-`
+`;

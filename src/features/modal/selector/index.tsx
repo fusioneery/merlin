@@ -9,6 +9,7 @@ import {getShadowStyle} from '@lib/shadow-style';
 import {Text} from '@ui/atoms/text';
 import {hideModalSelector} from '@features/navigation/model';
 import {TouchableWithoutFeedback} from 'react-native';
+import {Shadow} from '@ui/atoms/shadow';
 
 interface Option {
   label: string;
@@ -18,7 +19,7 @@ interface Option {
 interface ISelectorProps {
   onChange(val): void;
   onDelete?(): void;
-  onAdd?(): void;
+  onAdd?(): any;
   onExit?(): void;
   coords: {
     x: number;
@@ -50,12 +51,7 @@ export const Selector: React.FC<ISelectorProps> = ({
             hideModalSelector();
           }}>
           <TouchOutsideView>
-            <Container
-              style={{
-                ...getShadowStyle(theme.shadow.heavy),
-                left: coords.x,
-                top: coords.y,
-              }}>
+            <Container left={coords.x} top={coords.y}>
               {options.length > 0 &&
                 options.map((opt, idx) => (
                   <Option
@@ -100,15 +96,18 @@ export const Selector: React.FC<ISelectorProps> = ({
 };
 
 const Container = styled.View`
-  position: absolute;
   background-color: white;
+  position: absolute;
+  top: ${prop('top')}px;
+  left: ${prop('left')}px;
   border-radius: ${defaultTheme.borderRadius.normal};
-  z-index: 8;
   padding: 22px 0;
+  elevation: 10;
 `;
 
 const Option = styled.TouchableOpacity`
   padding: 8px 20px;
+  min-width: 170px;
 `;
 
 const TouchOutsideView = styled.View`

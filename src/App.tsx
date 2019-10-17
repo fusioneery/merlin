@@ -55,6 +55,10 @@ const AppNavigator = createStackNavigator(
     mode: 'modal',
     headerMode: 'none',
     transparentCard: true,
+    cardStyle: {
+      // makes transparentCard work for android
+      opacity: 1.0,
+    },
   },
 );
 
