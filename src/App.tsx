@@ -1,5 +1,6 @@
 import React from 'react';
 import {ThemeProvider} from 'emotion-theming';
+import {Immersive} from 'react-native-immersive';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import SafeAreaView from 'react-native-safe-area-view';
 import {createAppContainer} from 'react-navigation';
@@ -9,6 +10,15 @@ import styled from '@theme/styled';
 import {AddProfileScreen} from '@screens/add-profile';
 import {PhotoInstructionScreen} from '@screens/add-profile/photo-instruction';
 import {ViewProfileScreen} from '@screens/view-profile';
+
+Immersive.on();
+Immersive.setImmersive(true);
+const restoreImmersive = () => {
+  // __DEV__ && console.warn('Immersive State Changed!')
+  Immersive.on();
+};
+Immersive.addImmersiveListener(restoreImmersive);
+Immersive.removeImmersiveListener(restoreImmersive);
 
 const App: React.FC = () => {
   return (

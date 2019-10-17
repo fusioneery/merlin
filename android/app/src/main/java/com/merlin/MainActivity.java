@@ -4,6 +4,7 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+import com.rnimmersive.RNImmersiveModule;
 
 public class MainActivity extends ReactActivity {
 
@@ -25,4 +26,13 @@ public class MainActivity extends ReactActivity {
       }
     };
   }
+
+ @Override
+ public void onWindowFocusChanged(boolean hasFocus) {
+   super.onWindowFocusChanged(hasFocus);
+
+   if (hasFocus && RNImmersiveModule.getInstance() != null) {
+     RNImmersiveModule.getInstance().emitImmersiveStateChangeEvent();
+   }
+ }
 }
