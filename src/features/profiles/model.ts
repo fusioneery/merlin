@@ -51,14 +51,17 @@ photos
 
 export const changeCategory = createEvent('NEW_PROFILE/CHANGE_CATEGORY');
 export const changeName = createEvent('NEW_PROFILE/CHANGE_NAME');
+export const changeSurname = createEvent('NEW_PROFILE/CHANGE_SURNAME');
 export const category = createStore({value: 'designers', label: 'Дизайнеры'}).on(
   changeCategory,
   (_, val) => val,
 );
-export const name = createStore('Евгений Бугров').on(changeName, (_, val) => val);
+export const name = createStore('').on(changeName, (_, val) => val);
+export const surname = createStore('').on(changeSurname, (_, val) => val);
 
 export const newProfileRootStore = createStoreObject({
   photos,
   category,
   name,
+  surname,
 });

@@ -22,3 +22,4 @@ export const optionsStore = createStore([])
     }
   })
   .on(refillOptions, (_, opts) => opts);
+optionsStore.watch(state => console.warn(state));

@@ -1,4 +1,5 @@
 import React from 'react';
+import 'react-native-gesture-handler';
 import {ThemeProvider} from 'emotion-theming';
 import {Immersive} from 'react-native-immersive';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -10,15 +11,17 @@ import styled from '@theme/styled';
 import {AddProfileScreen} from '@screens/add-profile';
 import {PhotoInstructionScreen} from '@screens/add-profile/photo-instruction';
 import {ViewProfileScreen} from '@screens/view-profile';
+import {Platform} from 'react-native';
 
-Immersive.on();
-Immersive.setImmersive(true);
 const restoreImmersive = () => {
-  // __DEV__ && console.warn('Immersive State Changed!')
   Immersive.on();
 };
-Immersive.addImmersiveListener(restoreImmersive);
-Immersive.removeImmersiveListener(restoreImmersive);
+if (Platform.OS === 'android') {
+  restoreImmersive();
+  Immersive.setImmersive(true);
+  Immersive.addImmersiveListener(restoreImmersive);
+  Immersive.removeImmersiveListener(restoreImmersive);
+}
 
 const App: React.FC = () => {
   return (

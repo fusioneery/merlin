@@ -1,30 +1,41 @@
 import React, {ReactChild, MutableRefObject} from 'react';
 import styled from '@theme/styled';
 import {prop} from 'styled-tools';
-import {ITheme} from '@theme/theme-type';
+import {ITheme, TextSizes} from '@theme/theme-type';
 import {useTheme} from 'emotion-theming';
 
 interface ITextProps {
   color?: string;
-  size?: string;
+  size?: TextSizes;
   lineHeight?: string;
-  children: ReactChild;
+  children: string;
   onPress?(e: any): void;
   weight?: string | number;
+  isUpperCase?: boolean;
 }
 
 const Text = React.forwardRef((props: ITextProps, ref) => {
   const theme: ITheme = useTheme();
   const {
     color = 'black',
-    size = theme.font.sizes.normal,
+    size = 'normal',
     children,
     weight = theme.font.weights.normal,
-    lineHeight = theme.font.lineHeight,
+    isUpperCase = false,
   } = props;
+  if (!theme.font.lineHeight[size]) {
+    console.warn('size: ', size);
+  }
   return (
-    <StyledText ref={ref} {...props} color={color} size={size} weight={weight} family={theme.font.family}>
-      {children}
+    <StyledText
+      lineHeight={theme.font.lineHeight[size]}
+      ref={ref}
+      {...props}
+      color={color}
+      size={theme.font.sizes[size]}
+      weight={weight}
+      family={theme.font.family}>
+      {isUpperCase ? children.toUpperCase() : children}
     </StyledText>
   );
 });

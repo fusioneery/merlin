@@ -8,11 +8,12 @@ interface IShadowProps {
   shadow: IShadow | {};
   radius?: string;
   children: ReactElement | any;
+  z?: number;
   style: any;
 }
 
 export const Shadow = (props: IShadowProps) => {
-  const {children, shadow, radius = '0px', style} = props;
+  const {children, shadow, radius = '0px', style, z = 10} = props;
   const [state, setState] = useState({width: 0, height: 0, isCalculated: false});
   const {width, height, isCalculated} = state;
   const childrenWithProps = React.Children.map(children, child =>
@@ -28,8 +29,8 @@ export const Shadow = (props: IShadowProps) => {
   return isCalculated && Object.keys(shadow).length > 0 ? (
     <BoxShadow
       setting={{
-        ...getBoxShadowSettings(Math.floor(width), Math.floor(height), shadow, numberedRadius),
-        style: {zIndex: 10, ...style},
+        ...getBoxShadowSettings(width, height, shadow, numberedRadius),
+        style: {zIndex: z, ...style},
       }}>
       {childrenWithProps}
     </BoxShadow>

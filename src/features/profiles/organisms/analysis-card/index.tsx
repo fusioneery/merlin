@@ -31,15 +31,17 @@ export const AnalysisCard: React.FC<IAnalysisCardProps> = ({analysis: {name, des
       <Card style={getShadowStyle(theme.shadow.light)}>
         <Header>
           {getAnalysisByColor(color, theme.icons.sizes.medium)}
-          <Name weight={theme.font.weights.bold}>{name}</Name>
+          <Name size="bigger" weight={theme.font.weights.bold}>
+            {name}
+          </Name>
         </Header>
-        <Desc>{description}</Desc>
-        <Button color={color} title="Просмотреть" />
+        <Desc color={theme.colors.darkNeutral}>{description}</Desc>
+        <Button size="superbig" color={color} title="Просмотреть" />
         <TextButton
           weight={theme.font.weights.normal}
           isLowerCase
           isTextOnly
-          color={color}
+          color="neutral"
           title="Узнать подробнее"
         />
       </Card>
@@ -85,7 +87,7 @@ const Name = styled(Text)`
 `;
 
 const Button = styled(UIButton)`
-  width: auto;
+  width: 100%;
   max-width: 225px;
   margin-top: 30px;
 `;

@@ -13,17 +13,32 @@ type Sizes = {
   height: string;
   width: string;
 };
+
+export type TextSizes = 'big' | 'bigger' | 'normal' | 'smallier' | 'small';
+
+export type Colors =
+  | 'primary'
+  | 'secondary'
+  | 'neutral'
+  | 'dark'
+  | 'light'
+  | 'error'
+  | 'lightNeutral'
+  | 'darkNeutral';
 export interface ITheme {
   borderRadius: {
     normal: string;
     card: string;
     analysisCard: string;
+    option: string;
   };
 
   font: {
     sizes: {
       big: string;
+      bigger: string;
       normal: string;
+      smallier: string;
       small: string;
     };
     family: string;
@@ -31,11 +46,19 @@ export interface ITheme {
       normal: number;
       bold: string;
     };
-    lineHeight: string;
+    lineHeight: {
+      big: string;
+      bigger: string;
+      normal: string;
+      smallier: string;
+      small: string;
+    };
   };
   colors: {
     primary: string;
     secondary: string;
+    lightNeutral: string;
+    darkNeutral: string;
     error: string;
     neutral: string;
     dark: string;

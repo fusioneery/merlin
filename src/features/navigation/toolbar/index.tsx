@@ -11,6 +11,7 @@ import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {Dimensions} from 'react-native';
 import {prop} from 'styled-tools';
 import {Shadow} from '@ui/atoms/shadow';
+import {normalize} from '@lib/normalize-font';
 
 interface IToolbarProps {
   title: string;
@@ -24,15 +25,15 @@ export const Toolbar: React.FC<IToolbarProps> = ({title, children, onBack, noSha
   return (
     //@ts-ignore
     <Shadow shadow={noShadow ? {} : theme.shadow.light}>
-      <Container
-        width={Dimensions.get('window').width}
-        style={noShadow ? {} : getShadowStyle(theme.shadow.light)}>
+      <Container width={Dimensions.get('window').width}>
         {onBack && (
           <TouchableWithoutFeedback onPress={onBack}>
             <Arrow {...theme.icons.sizes} fill={theme.colors.dark} />
           </TouchableWithoutFeedback>
         )}
-        <Text weight={theme.font.weights.bold}>{title}</Text>
+        <Text size="bigger" weight={theme.font.weights.bold}>
+          {title}
+        </Text>
         {children}
       </Container>
     </Shadow>
@@ -49,5 +50,5 @@ const Container = styled.View`
   justify-content: space-between;
   position: relative;
   align-items: center;
-  z-index: 6;
+  z-index: 12;
 `;

@@ -1,8 +1,11 @@
 import React, {useState, useRef, useCallback, useEffect} from 'react';
-import {View, Alert} from 'react-native';
+import {View, Alert, TouchableWithoutFeedback} from 'react-native';
 import {useStore} from 'effector-react';
 import {useTheme} from 'emotion-theming';
-import {ifProp} from 'styled-tools';
+import {ifProp, prop, ifNotProp} from 'styled-tools';
+import DialogInput from 'react-native-dialog-input';
+import {useSafeArea} from 'react-native-safe-area-view';
+
 import {defaultTheme} from '@theme/default-theme';
 import styled from '@theme/styled';
 import {ITheme} from '@theme/theme-type';
@@ -10,14 +13,17 @@ import {Toolbar} from '@features/navigation/toolbar';
 import {UIButton} from '@ui/atoms/button';
 import {Text} from '@ui/atoms/text';
 import {Selector} from '@features/modal/selector';
-import DialogInput from 'react-native-dialog-input';
-
 import {getShadowStyle} from '@lib/shadow-style';
 import {PhotoCard} from '@features/profiles/organisms/photo-card';
-import {takeNewProfilePhoto, newProfileRootStore, changeCategory, changeName} from '@features/profiles/model';
+import {
+  takeNewProfilePhoto,
+  newProfileRootStore,
+  changeCategory,
+  changeName,
+  changeSurname,
+} from '@features/profiles/model';
 import Info from 'assets/icons/info.svg';
 import {MainScrollableView} from '@ui/atoms/main-scrollable-view';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {
   setPositionModalSelector,
   modalSelectorCoordinates,
@@ -25,7 +31,6 @@ import {
   showModalSelector,
   hideModalSelector,
 } from '@features/navigation/model';
-import {useSafeArea} from 'react-native-safe-area-view';
 import {
   optionsStore,
   refillOptions,
@@ -35,6 +40,7 @@ import {
   closeAddOptionDialog,
   addOptionDialog,
 } from '@features/modal/model';
+import {HorizontalSelector} from '@ui/molecules/horizontal-selector';
 
 interface IAddProfileScreenProps {}
 
@@ -55,16 +61,26 @@ const CATS = [
 
 export const AddProfileScreen = ({navigation}) => {
   const theme: ITheme = useTheme();
-  const {photos, name, category} = useStore(newProfileRootStore);
+  const {photos, name, surname, category} = useStore(newProfileRootStore);
   const {top} = useSafeArea();
   const {modalSelectorCoordinates, modalSelectorIsVisible} = useStore(modalSelectorStore);
-  const opts = useStore(optionsStore);
+  const opts: any[] = useStore(optionsStore);
   const isDialogVisible = useStore(addOptionDialog);
-  const labelStyleParams = {size: theme.font.sizes.small, color: theme.colors.neutral};
+  const labelStyleParams = {
+    size: 'small',
+    color: theme.colors.neutral,
+    isUpperCase: true,
+    weight: theme.font.weights.bold,
+  };
+  const inputParams = {
+    placeholderTextColor: theme.colors.lightNeutral,
+    placeholder: 'Введите текст',
+  };
   const categoryValRef: any = useRef(null);
   const goToProfile = () => {
     let errors: Array<string> = [];
     if (name.length === 0) errors.push('Введите, пожалуйста, имя пациента.');
+    if (surname.length === 0) errors.push('Введите, пожалуйста, фамилию пациента.');
     if (!photos.profile || !photos.sideview) errors.push('Добавьте два фото пациента.');
     if (errors.length === 0) {
       navigation.navigate('ViewProfile');
@@ -101,43 +117,62 @@ export const AddProfileScreen = ({navigation}) => {
           <Info {...theme.icons.sizes} fill={theme.colors.dark} />
         </TouchableWithoutFeedback>
       </Toolbar>
-      <MainScrollableView>
+      <MainScrollableView noHorizontalPadding>
         <InputGroup>
           <Field>
-            <FIO {...labelStyleParams}>ФИО</FIO>
-            <Input onChangeText={text => changeName(text)} value={name} />
+            <Text {...labelStyleParams}>Фамилия</Text>
+            <Input {...inputParams} onChangeText={text => changeSurname(text)} value={surname} />
           </Field>
           <Field>
-            <Category {...labelStyleParams}>Категория</Category>
-            <CategoryValue onPress={showModalSelector} ref={categoryValRef} weight={theme.font.weights.bold}>
+            <Text {...labelStyleParams}>Имя</Text>
+            <Input {...inputParams} onChangeText={text => changeName(text)} value={name} />
+          </Field>
+          <Field noHorizontalPadding>
+            <CategoryLabel {...labelStyleParams}>Категория</CategoryLabel>
+            <StyledHorizontalSelector
+              onSelect={val => {
+                changeCategory(val);
+                chooseOption(val);
+              }}
+              //@ts-ignore
+              onAdd={openAddOptionDialog}
+              activeOption={category}
+              options={opts}
+            />
+            {/* <CategoryValue onPress={showModalSelector} ref={categoryValRef} weight={theme.font.weights.bold}>
               {category.label}
-            </CategoryValue>
+            </CategoryValue> */}
           </Field>
         </InputGroup>
-        <PhotoCard
-          photo={photos.profile}
-          onLoad={() => {
-            takeNewProfilePhoto('profile');
-          }}
-          type="profile"
-        />
-        <PhotoCard
-          photo={photos.sideview}
-          onLoad={() => {
-            takeNewProfilePhoto('sideview');
-          }}
-          type="sideview"
-        />
-        <ButtonContainer>
-          <UIButton
-            onPress={() => {
-              goToProfile();
+        <Padding>
+          <PhotoCard
+            idx={12}
+            photo={photos.profile}
+            onLoad={() => {
+              takeNewProfilePhoto('profile');
             }}
-            color="primary"
-            title="Сохранить"
+            type="profile"
           />
-        </ButtonContainer>
-        <Selector
+          <PhotoCard
+            idx={11}
+            photo={photos.sideview}
+            onLoad={() => {
+              takeNewProfilePhoto('sideview');
+            }}
+            type="sideview"
+          />
+          <ButtonContainer>
+            <Button
+              onPress={() => {
+                goToProfile();
+              }}
+              color="primary"
+              size="superbig"
+              title="Сохранить"
+            />
+          </ButtonContainer>
+        </Padding>
+        {/* <Selector
           onChange={val => {
             changeCategory(val);
             chooseOption(val);
@@ -149,8 +184,9 @@ export const AddProfileScreen = ({navigation}) => {
           coords={modalSelectorCoordinates}
           options={opts}
           // value={opts.filter(el => el.active).value}
-        />
+        /> */}
         <DialogInput
+          textInputProps={{autoCorrect: false}}
           isDialogVisible={isDialogVisible}
           title="Добавить категорию"
           hintInput="Введите название"
@@ -169,29 +205,25 @@ export const AddProfileScreen = ({navigation}) => {
 };
 
 const InputGroup = styled.View`
-  margin-bottom: 30px;
+  margin-bottom: 36px;
 `;
 const Field = styled.View`
   display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  padding: 0 ${ifNotProp('noHorizontalPadding', defaultTheme.padding.default, '0')};
 `;
 
-const FIO = styled(Text)`
-  top: -7px;
-`;
-
-const Category = styled(Text)`
-  top: -3px;
+const Padding = styled.View`
+  padding: 0 ${defaultTheme.padding.default};
 `;
 
 const Input = styled.TextInput`
   flex: 1;
-  margin-left: 32px;
-  font-size: ${defaultTheme.font.sizes.normal};
-  padding-bottom: 5px;
-  border-bottom-color: #d8d9e2;
+  margin-top: 16px;
+  font-size: ${defaultTheme.font.sizes.big};
+  color: ${defaultTheme.colors.dark};
+  padding-bottom: 7px;
+  border-bottom-color: #ededed;
   border-bottom-width: 1px;
 `;
 
@@ -199,8 +231,21 @@ const CategoryValue = styled(Text)`
   margin-left: 18px;
 `;
 
+const CategoryLabel = styled(Text)`
+  padding: 0 ${defaultTheme.padding.default};
+`;
+
+const StyledHorizontalSelector = styled(HorizontalSelector)`
+  margin-top: 20px;
+`;
+
 const ButtonContainer = styled.View`
-  flex-direction: row;
+  /* flex-direction: row;
   justify-content: flex-end;
-  align-items: center;
+  align-items: center; */
+  z-index: 11;
+`;
+
+const Button = styled(UIButton)`
+  flex: 1;
 `;

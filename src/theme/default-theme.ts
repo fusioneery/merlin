@@ -6,11 +6,14 @@ const defaultTheme: ITheme = {
     normal: '10px',
     card: '33px',
     analysisCard: '20px',
+    option: '20px',
   },
   font: {
     sizes: {
       big: normalize(24),
+      bigger: normalize(20),
       normal: normalize(18),
+      smallier: normalize(16),
       small: normalize(14),
     },
     family: 'Circe',
@@ -18,11 +21,19 @@ const defaultTheme: ITheme = {
       normal: 400,
       bold: 'bold',
     },
-    lineHeight: normalize(27),
+    lineHeight: {
+      big: normalize(36),
+      bigger: normalize(30),
+      normal: normalize(27),
+      smallier: normalize(24),
+      small: normalize(21),
+    },
   },
   colors: {
     primary: '#5574F9',
     secondary: '#F39031',
+    lightNeutral: '#D8D9E2',
+    darkNeutral: '#6D6F79',
     neutral: '#a8aec1',
     error: '#FF3A3A',
     dark: 'black',
@@ -31,13 +42,13 @@ const defaultTheme: ITheme = {
   cards: {
     borderRadius: '33px',
     shadow: {
-      color: '#586bae',
+      color: '#7f89ad',
       offset: {
         width: 0,
-        height: 11,
+        height: 4,
       },
-      radius: 27,
-      opacity: 0.25,
+      radius: 85,
+      opacity: 0.09,
     },
     iconSizes: {
       width: normalize(117),
@@ -45,16 +56,22 @@ const defaultTheme: ITheme = {
     },
     width: normalize(300),
     height: normalize(345),
-    overlayGradient: ['rgba(0,0,0,0)', 'rgba(0,0,0,0)', 'rgba(0,0,0,0)', 'rgba(0,0,0,0.63)', 'rgba(0,0,0,1)'],
+    overlayGradient: [
+      'rgba(0,0,0,0)',
+      'rgba(0,0,0,0)',
+      'rgba(0,0,0,0)',
+      'rgba(0,0,0,0.264)',
+      'rgba(0,0,0,0.536)',
+    ],
   },
   avatars: {
     borderRadius: {
-      profile: normalize(50 / 2),
+      profile: normalize(64 / 2),
     },
     sizes: {
       profile: {
-        width: normalize(50),
-        height: normalize(50),
+        width: normalize(64),
+        height: normalize(64),
       },
     },
   },
@@ -76,13 +93,13 @@ const defaultTheme: ITheme = {
   },
   shadow: {
     light: {
-      color: '#586bae',
+      color: '#5e738c',
       offset: {
         width: 0,
-        height: 1,
+        height: 2,
       },
-      radius: 24,
-      opacity: 0.05,
+      radius: 20,
+      opacity: 0.025,
     },
     heavy: {
       color: '#586bae',

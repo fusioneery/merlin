@@ -5,7 +5,7 @@ import {useTheme} from 'emotion-theming';
 import {ifProp} from 'styled-tools';
 import {defaultTheme} from '@theme/default-theme';
 import styled from '@theme/styled';
-import {ITheme} from '@theme/theme-type';
+import {ITheme, Colors} from '@theme/theme-type';
 import {Toolbar} from '@features/navigation/toolbar';
 
 import {Text} from '@ui/atoms/text';
@@ -31,7 +31,7 @@ export interface IAnalysis {
   id: number;
   name: string;
   description: string;
-  color: 'primary' | 'secondary' | 'neutral';
+  color: 'primary' | 'secondary';
 }
 
 const ANALYSISES: Array<IAnalysis> = [
@@ -56,10 +56,8 @@ const ANALYSISES: Array<IAnalysis> = [
   },
 ];
 
-const breakName = name => {
-  const splittedName = name.split(' ');
-  if (splittedName.length === 0) return name;
-  return splittedName.reduce((acc, n) => acc + `\n${n}`);
+const breakName = (name, surname) => {
+  return [name, surname].reduce((acc, n) => acc + `\n${n}`);
 };
 
 const SETTINGS = [
@@ -73,7 +71,7 @@ const DeviceHeight = Math.round(Dimensions.get('window').height);
 export const ViewProfileScreen: React.FC<Props> = ({navigation}) => {
   const theme: ITheme = useTheme();
   const {top} = useSafeArea();
-  const {photos, name, category} = useStore(newProfileRootStore);
+  const {photos, name, surname, category} = useStore(newProfileRootStore);
   const {modalSelectorCoordinates, modalSelectorIsVisible} = useStore(modalSelectorStore);
   const detailsRef: any = useRef(null);
   useEffect(() => {
@@ -107,8 +105,8 @@ export const ViewProfileScreen: React.FC<Props> = ({navigation}) => {
       </Toolbar>
       <MainScrollableView verticalPadding="20px">
         <ProfileInfo>
-          <Name size={theme.font.sizes.big} weight={theme.font.weights.bold}>
-            {breakName(name)}
+          <Name size="big" weight={theme.font.weights.bold}>
+            {breakName(name, surname)}
           </Name>
           <ImageGroup>
             <Profile source={{uri: photos.profile}} />

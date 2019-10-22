@@ -1,22 +1,36 @@
 import React, {ReactNode} from 'react';
 import {TouchableOpacity, Platform} from 'react-native';
 import MaskedView from '@react-native-community/masked-view';
-import {prop, ifProp} from 'styled-tools';
+import {prop, ifProp, switchProp} from 'styled-tools';
 import {useTheme} from 'emotion-theming';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from '@theme/styled';
-import {ITheme} from '@theme/theme-type';
+import {ITheme, Colors} from '@theme/theme-type';
 import {Text} from '@ui/atoms/text';
 import {getShadowStyle} from '@lib/shadow-style';
+import {defaultTheme} from '@theme/default-theme';
+
+const getTextSize = size => {
+  switch (size) {
+    case 'normal':
+      return 'small';
+    case 'big':
+      return 'normal';
+    case 'superbig':
+      return 'smallier';
+    default:
+      return 'small';
+  }
+};
 
 interface IButtonProps {
   onPress?(): void;
   title?: string;
   accessibilityLabel?: string;
-  color: 'primary' | 'secondary' | 'neutral';
+  color: Colors;
   disabled?: boolean;
   testID?: string;
-  size?: 'normal' | 'big';
+  size?: 'normal' | 'big' | 'superbig';
   outlined?: boolean;
   isTextOnly?: boolean;
   style?: any;
@@ -37,13 +51,13 @@ const UIButton = (props: IButtonProps) => {
     outlined,
     style,
   } = props;
-  const textSize = size == 'normal' ? theme.font.sizes.small : theme.font.sizes.normal;
+  const textSize = getTextSize(size);
   const textInGradientCommonProps = {
     color: theme.colors[color],
     weight: weight,
     size: textSize,
     fontFamily: theme.fontFamily,
-    textAlign: 'center'
+    textAlign: 'center',
   };
   const text = isLowerCase ? title : title.toUpperCase();
   if (isTextOnly) {
@@ -104,7 +118,11 @@ const TextInGradient = styled(Text)`
 `;
 
 const StyledLinearGradient = styled(LinearGradient)`
-  padding: 10px ${ifProp({size: 'big'}, '60px', '20px')};
+  padding: ${switchProp('size', {
+    big: '10px 60px',
+    normal: '10px 20px',
+    superbig: '16px 65px',
+  })};
   border-radius: ${prop('radius')};
 `;
 
@@ -115,7 +133,11 @@ const StyledLinearGradientContainer = styled(LinearGradient)`
 `;
 
 const Outline = styled.View`
-  padding: 10px ${ifProp({size: 'big'}, '60px', '20px')};
+  padding: ${switchProp('size', {
+    big: '10px 60px',
+    normal: '10px 20px',
+    superbig: '16px 65px',
+  })};
   border-radius: ${prop('radius')};
   border: 1px solid ${prop('color')};
   background-color: transparent;

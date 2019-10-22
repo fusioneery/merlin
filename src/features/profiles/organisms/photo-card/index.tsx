@@ -16,9 +16,10 @@ interface IPhotoCardProps {
   type: 'profile' | 'sideview';
   photo?: any;
   onLoad?: any;
+  idx: number;
 }
 
-export const PhotoCard: React.FC<IPhotoCardProps> = ({type, onLoad, photo}) => {
+export const PhotoCard: React.FC<IPhotoCardProps> = ({type, onLoad, photo, idx}) => {
   const iconStyle = {marginTop: 60, zIndex: 5};
   const theme: ITheme = useTheme();
   const Icon = type == 'profile' ? Profile : Sideview;
@@ -28,17 +29,19 @@ export const PhotoCard: React.FC<IPhotoCardProps> = ({type, onLoad, photo}) => {
   const hasPhoto = photo;
   return (
     //@ts-ignore
-    <StyledShadow shadow={theme.cards.shadow} radius={theme.cards.borderRadius}>
-      <Card style={getShadowStyle(theme.cards.shadow)} title="">
+    <StyledShadow z={idx} shadow={theme.cards.shadow} radius={theme.cards.borderRadius}>
+      <Card title="">
         {!hasPhoto && <Icon style={iconStyle} {...theme.cards.iconSizes} />}
-        <Caption color={theme.colors.neutral}>Фото в {type == 'profile' ? 'профиль' : 'фас'}</Caption>
-        <UIButton
-          style={{zIndex: 5}}
+        {!hasPhoto && (
+          <Caption color={theme.colors.neutral}>Фото в {type == 'profile' ? 'профиль' : 'фас'}</Caption>
+        )}
+        <Button
           onPress={onLoad}
           size="big"
-          isTextOnly
-          color="primary"
-          title={photo ? 'изменить' : 'загрузить'}
+          isTextOnly={!hasPhoto}
+          outlined={hasPhoto}
+          color={hasPhoto ? 'light' : 'primary'}
+          title={hasPhoto ? 'изменить' : 'загрузить'}
         />
         {hasPhoto && (
           <>
@@ -94,7 +97,11 @@ const Overlay = styled(LinearGradient)`
   border-radius: ${defaultTheme.cards.borderRadius};
 `;
 
+const Button = styled(UIButton)`
+  z-index: 3;
+  width: 100%;
+`;
+
 const StyledShadow = styled(Shadow)`
   margin-bottom: 32px;
-  z-index: 1;
 `;
