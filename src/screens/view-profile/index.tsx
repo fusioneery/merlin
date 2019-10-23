@@ -91,6 +91,15 @@ export const ViewProfileScreen: React.FC<Props> = ({navigation}) => {
   }, [detailsRef.current]);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
+      <Selector
+        onChange={val => {
+          if (val.value === 'Редактировать') navigation.navigate('AddProfile');
+        }}
+        onDelete={() => console.log('deleted')}
+        isVisible={modalSelectorIsVisible}
+        coords={modalSelectorCoordinates}
+        options={SETTINGS}
+      />
       <Toolbar
         noShadow
         onBack={() => {
@@ -119,15 +128,6 @@ export const ViewProfileScreen: React.FC<Props> = ({navigation}) => {
           ))}
         </Analysises>
       </MainScrollableView>
-      <Selector
-        onChange={val => {
-          if (val.value === 'Редактировать') navigation.navigate('AddProfile');
-        }}
-        onDelete={() => console.log('deleted')}
-        isVisible={modalSelectorIsVisible}
-        coords={modalSelectorCoordinates}
-        options={SETTINGS}
-      />
     </View>
   );
 };

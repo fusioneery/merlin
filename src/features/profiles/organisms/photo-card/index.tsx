@@ -29,7 +29,14 @@ export const PhotoCard: React.FC<IPhotoCardProps> = ({type, onLoad, photo, idx})
   const hasPhoto = photo;
   return (
     //@ts-ignore
-    <StyledShadow z={idx} shadow={theme.cards.shadow} radius={theme.cards.borderRadius}>
+    <StyledShadow
+      z={idx}
+      shadow={{
+        ...theme.cards.shadow,
+        opacity: 0.2,
+        radius: 50,
+      }}
+      radius={theme.cards.borderRadius}>
       <Card title="">
         {!hasPhoto && <Icon style={iconStyle} {...theme.cards.iconSizes} />}
         {!hasPhoto && (

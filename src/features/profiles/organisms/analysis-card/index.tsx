@@ -27,8 +27,8 @@ const getAnalysisByColor = (color, props) => {
 export const AnalysisCard: React.FC<IAnalysisCardProps> = ({analysis: {name, description, color}}) => {
   const theme: ITheme = useTheme();
   return (
-    <StyledShadow shadow={theme.shadow.light} radius={theme.borderRadius.analysisCard}>
-      <Card style={getShadowStyle(theme.shadow.light)}>
+    <StyledShadow shadow={theme.cards.shadow} radius={theme.borderRadius.analysisCard}>
+      <Card>
         <Header>
           {getAnalysisByColor(color, theme.icons.sizes.medium)}
           <Name size="bigger" weight={theme.font.weights.bold}>

@@ -1,5 +1,8 @@
 import {ITheme} from './theme-type';
 import {normalize} from '@lib/normalize-font';
+import {Platform} from 'react-native';
+
+const isAndroid = Platform.OS === 'android';
 
 const defaultTheme: ITheme = {
   borderRadius: {
@@ -48,7 +51,7 @@ const defaultTheme: ITheme = {
         height: 4,
       },
       radius: 85,
-      opacity: 0.09,
+      opacity: isAndroid ? 0.12 : 0.09,
     },
     iconSizes: {
       width: normalize(117),
@@ -99,7 +102,7 @@ const defaultTheme: ITheme = {
         height: 2,
       },
       radius: 20,
-      opacity: 0.025,
+      opacity: isAndroid ? 0.08 : 0.025,
     },
     heavy: {
       color: '#586bae',

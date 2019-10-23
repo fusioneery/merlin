@@ -102,7 +102,7 @@ const Container = styled.View`
   left: ${prop('left')}px;
   border-radius: ${defaultTheme.borderRadius.normal};
   padding: 22px 0;
-  elevation: 10;
+  elevation: 20;
 `;
 
 const Option = styled.TouchableOpacity`
@@ -117,5 +117,5 @@ const TouchOutsideView = styled.View`
   left: 0;
   bottom: 0;
   flex: 1;
-  z-index: 7;
+  z-index: 13;
 `;
