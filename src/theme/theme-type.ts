@@ -107,6 +107,7 @@ export interface ITheme {
     sizes: {
       small: Sizes;
       medium: Sizes;
+      big: Sizes;
     };
   };
 }

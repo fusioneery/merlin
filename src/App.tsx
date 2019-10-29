@@ -8,9 +8,10 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {defaultTheme} from '@theme/default-theme';
 import styled from '@theme/styled';
-import {AddProfileScreen} from '@screens/add-profile';
-import {PhotoInstructionScreen} from '@screens/add-profile/photo-instruction';
-import {ViewProfileScreen} from '@screens/view-profile';
+import {AddProfileScreen} from '@features/profiles/screens/add-profile';
+import {PhotoInstructionScreen} from '@features/profiles/screens/add-profile/photo-instruction';
+import {ResearchLandingPage} from '@features/researches/screens/research-landing';
+import {ViewProfileScreen} from '@features/profiles/screens/view-profile';
 import {Platform} from 'react-native';
 
 const restoreImmersive = () => {
@@ -48,6 +49,9 @@ const ProfileStack = createStackNavigator(
     },
     ViewProfile: {
       screen: ViewProfileScreen,
+    },
+    ResearchLanding: {
+      screen: ResearchLandingPage,
     },
   },
   {

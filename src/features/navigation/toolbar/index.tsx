@@ -4,8 +4,6 @@ import {defaultTheme} from '@theme/default-theme';
 import styled from '@theme/styled';
 import {ITheme} from '@theme/theme-type';
 import {Text} from '@ui/atoms/text';
-import {BoxShadow} from 'react-native-shadow';
-import {getShadowStyle} from '@lib/shadow-style';
 import Arrow from 'assets/icons/arrow.svg';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {Dimensions} from 'react-native';
@@ -15,7 +13,7 @@ import {normalize} from '@lib/normalize-font';
 
 interface IToolbarProps {
   title: string;
-  children: ReactNode;
+  children?: ReactNode;
   onBack?(): void;
   noShadow?: boolean;
 }

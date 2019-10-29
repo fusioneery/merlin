@@ -25,6 +25,8 @@ export const MainScrollableView: React.FC<IMainScrollableViewProps> = ({
 };
 
 const Main = styled.View`
-  padding: ${prop('verticalPadding', '35px')} ${ifNotProp('noHorizontalPadding', defaultTheme.padding.default, '0px')};
+  padding: ${prop('verticalPadding', '35px')}
+    ${ifNotProp('noHorizontalPadding', defaultTheme.padding.default, '0px')};
   background-color: ${defaultTheme.colors.light};
+  flex: 1;
 `;

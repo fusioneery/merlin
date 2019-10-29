@@ -124,7 +124,13 @@ export const ViewProfileScreen: React.FC<Props> = ({navigation}) => {
         </ProfileInfo>
         <Analysises>
           {ANALYSISES.map(analysis => (
-            <AnalysisCard key={analysis.id} analysis={analysis} />
+            <AnalysisCard
+              onDetails={() => {
+                navigation.navigate('ResearchLanding');
+              }}
+              key={analysis.id}
+              analysis={analysis}
+            />
           ))}
         </Analysises>
       </MainScrollableView>

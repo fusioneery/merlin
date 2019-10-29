@@ -7,7 +7,6 @@ import {ITheme} from '@theme/theme-type';
 import Profile from 'assets/icons/face-profile.svg';
 import Sideview from 'assets/icons/face-sideview.svg';
 import {UIButton} from '@ui/atoms/button';
-import {getShadowStyle} from '@lib/shadow-style';
 import {Text} from '@ui/atoms/text';
 import {normalize} from '@lib/normalize-font';
 import {Shadow} from '@ui/atoms/shadow';

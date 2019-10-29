@@ -127,6 +127,10 @@ const defaultTheme: ITheme = {
         width: '53px',
         height: '53px',
       },
+      big: {
+        width: '76px',
+        height: '76px',
+      },
     },
   },
 };

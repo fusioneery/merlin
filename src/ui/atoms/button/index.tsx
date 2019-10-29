@@ -94,7 +94,7 @@ const UIButton = (props: IButtonProps) => {
     );
   }
   return (
-    <TouchableOpacity style={getShadowStyle(theme.shadow.heavy)} onPress={onPress}>
+    <TouchableOpacity style={{...getShadowStyle(theme.shadow.heavy), ...style}} onPress={onPress}>
       <StyledLinearGradient
         size={size}
         start={{x: 0, y: 0}}

@@ -9,7 +9,7 @@ interface IShadowProps {
   radius?: string;
   children: ReactElement | any;
   z?: number;
-  style: any;
+  style?: any;
 }
 
 export const Shadow = (props: IShadowProps) => {
@@ -24,8 +24,7 @@ export const Shadow = (props: IShadowProps) => {
       },
     }),
   );
-  const numberedRadius = Number(radius.substr(0, 2));
-  console.log(width, height);
+  const numberedRadius = Number(radius.slice(0, -2));
   return isCalculated && Object.keys(shadow).length > 0 ? (
     <BoxShadow
       setting={{

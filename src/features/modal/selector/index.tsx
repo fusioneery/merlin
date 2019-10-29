@@ -5,7 +5,6 @@ import {css} from '@emotion/native';
 import {defaultTheme} from '@theme/default-theme';
 import styled from '@theme/styled';
 import {ITheme} from '@theme/theme-type';
-import {getShadowStyle} from '@lib/shadow-style';
 import {Text} from '@ui/atoms/text';
 import {hideModalSelector} from '@features/navigation/model';
 import {TouchableWithoutFeedback} from 'react-native';

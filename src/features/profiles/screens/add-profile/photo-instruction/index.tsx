@@ -9,6 +9,7 @@ import {useTheme} from 'emotion-theming';
 import Photo from '@assets/images/photo-instruction.jpg';
 import Point from '@assets/icons/point.svg';
 import {Text} from '@ui/atoms/text';
+import {List} from '@ui/molecules/list';
 
 interface IPhotoInstructionScreenProps {
   navigation: any;
@@ -32,14 +33,7 @@ export const PhotoInstructionScreen: React.FC<IPhotoInstructionScreenProps> = ({
       visible={true}>
       <Card style={getShadowStyle(theme.shadow.light)}>
         <PhotoInstruction source={Photo} />
-        <List>
-          {INSTRUCTIONS.map(msg => (
-            <Item key={msg}>
-              <Point width={20} height={20} />
-              <Paragraph>{msg}</Paragraph>
-            </Item>
-          ))}
-        </List>
+        <StyledList items={INSTRUCTIONS} />
       </Card>
     </Modal>
   );
@@ -64,12 +58,9 @@ const PhotoInstruction = styled.Image`
   border-top-right-radius: ${defaultTheme.borderRadius.normal};
 `;
 
-const List = styled.View`
+const StyledList = styled(List)`
   flex: 5;
   width: 80%;
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
   padding: 15px 0;
 `;
 
