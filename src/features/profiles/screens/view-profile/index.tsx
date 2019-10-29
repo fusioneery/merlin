@@ -141,6 +141,7 @@ export const ViewProfileScreen: React.FC<Props> = ({navigation}) => {
 const ProfileInfo = styled.View`
   display: flex;
   flex-direction: row;
+  padding: 0 ${defaultTheme.padding.default};
 `;
 const Name = styled(Text)``;
 

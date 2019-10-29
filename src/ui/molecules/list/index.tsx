@@ -9,12 +9,13 @@ interface IListProps {
   items: [string];
   color?: 'primary' | 'secondary';
   marginBetweenItems?: string;
+  style: any;
 }
 
-export const List: React.FC<IListProps> = ({items, color = 'primary', marginBetweenItems}) => {
+export const List: React.FC<IListProps> = ({items, color = 'primary', marginBetweenItems, style}) => {
   const Point = color === 'primary' ? PrimaryPoint : SecondaryPoint;
   return (
-    <UIList>
+    <UIList style={style}>
       {items.map((item, idx) => (
         <Item marginBetweenItems={marginBetweenItems} key={idx}>
           <Point width={20} height={20} />

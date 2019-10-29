@@ -205,6 +205,7 @@ export const AddProfileScreen = ({navigation}) => {
 };
 
 const InputGroup = styled.View`
+  margin-top: 24px;
   margin-bottom: 36px;
 `;
 const Field = styled.View`
@@ -220,6 +221,7 @@ const Padding = styled.View`
 const Input = styled.TextInput`
   flex: 1;
   margin-top: 16px;
+  min-height: 24px;
   font-size: ${defaultTheme.font.sizes.big};
   color: ${defaultTheme.colors.dark};
   padding-bottom: 7px;
@@ -247,5 +249,5 @@ const ButtonContainer = styled.View`
 `;
 
 const Button = styled(UIButton)`
-  flex: 1;
+  margin-bottom: 15px;
 `;

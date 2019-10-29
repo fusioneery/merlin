@@ -63,7 +63,8 @@ const Desc = styled(Text)`
 
 const Button = styled(UIButton)`
   width: 100%;
-  max-width: 225px;
+  flex: 1;
+  /* max-width: 225px; */
   margin-top: 30px;
 `;
 

@@ -9,6 +9,7 @@ import {Text} from '@ui/atoms/text';
 import {hideModalSelector} from '@features/navigation/model';
 import {TouchableWithoutFeedback} from 'react-native';
 import {Shadow} from '@ui/atoms/shadow';
+import {getShadowStyle} from '@lib/shadow-style';
 
 interface Option {
   label: string;
@@ -50,7 +51,7 @@ export const Selector: React.FC<ISelectorProps> = ({
             hideModalSelector();
           }}>
           <TouchOutsideView>
-            <Container left={coords.x} top={coords.y}>
+            <Container style={getShadowStyle(theme.shadow.heavy)} left={coords.x} top={coords.y}>
               {options.length > 0 &&
                 options.map((opt, idx) => (
                   <Option
